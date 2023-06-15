@@ -16,5 +16,4 @@ An app that will be the platform for what we do in real life, learn and share ou
 ### Legacy Project Refactoring
 
 ## Findings:
-  -- NPM depenedencies in package.json were missing
-
+  -- NPM dependencies in package.json were missing

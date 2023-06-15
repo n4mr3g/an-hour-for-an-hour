@@ -1,8 +1,13 @@
+import { Request, Response, NextFunction } from "express";
 const jwt = require("jsonwebtoken");
 const { User } = require("../models/index");
 const SECRET_KEY = process.env.SECRET_KEY || "thisIsNotSafe";
 
-const authMiddleware = async (req, res, next) => {
+const authMiddleware = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   const authHeaders = req.headers["authorization"];
   if (!authHeaders) return res.sendStatus(403);
   const token = authHeaders.split(" ")[1];
@@ -21,4 +26,4 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-module.exports = authMiddleware;
+export default authMiddleware;

@@ -38,4 +38,4 @@ const userSchema = new Schema({
 const User = mongoose.model("User", userSchema);
 const Offer = mongoose.model("Offer", offerSchema);
 
-module.exports = { Offer, User };
+export { User, Offer };

@@ -1,9 +1,12 @@
 const { Offer } = require("../models/index");
+import { Request, Response } from "express";
 const Crypto = require("crypto");
 
-const { randomNumber } = require("../utils/utils.js");
+//TODO: remove randomNumber, use UUID instead
+const { randomNumber } = require("../utils/utils.ts");
 
-exports.postOffer = async (req, res) => {
+
+export async function postOffer(req: Request, res: Response) {
   try {
     console.log("Saving offer to database...");
     const offer = req.body;
@@ -20,12 +23,12 @@ exports.postOffer = async (req, res) => {
     console.log(error);
     res.send({
       data: "null",
-      error: error.message,
+      error: (error as Error).message,
     });
   }
-};
+}
 
-exports.getOffer = async (req, res) => {
+export async function getOffer(req: Request, res: Response) {
   try {
     console.log("getting all offers from db");
     const allOffers = await Offer.find();
@@ -36,12 +39,12 @@ exports.getOffer = async (req, res) => {
     });
   } catch (error) {
     res.status(500);
-    console.log(error);
+    console.error(error);
     res.send({
       data: "null",
-      error: error.message,
+      error: (error as Error).message,
     });
   }
 
   //TODO need to add the patch, update and delete paths as well.
-};
+}

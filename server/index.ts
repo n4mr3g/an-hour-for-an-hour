@@ -1,13 +1,21 @@
-const express = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
+import express, { Request, Response, NextFunction } from "express";
+import cors from "cors";
+import bodyParser from "body-parser";
+import router from "./router";
 
-const { router } = require("./router");
+//TODO: decide if this is needed
+declare global {
+  namespace Express {
+    interface Request {
+      user?: Record<string, any>
+    }
+  }
+}
 
 const app = express();
 const port = 4000;
 
-const corsConfig = {
+const corsConfig: cors.CorsOptions = {
   origin: "http://localhost:4000",
   credentials: true,
 };
@@ -24,8 +32,3 @@ app.use(router);
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
-
-// for later
-// app.use(express.json());
-//parse incoming request with all types
-// app.use(express.urlencoded({ extended: true }));

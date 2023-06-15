@@ -1,10 +1,12 @@
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const { User } = require("../models/index");
-const SECRET_KEY = process.env.SECRET_KEY || "thisIsNotSafe";
-const { randomNumber } = require("../utils/utils");
+import { Request, Response } from "express";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import { User } from "../models/index";
+import randomNumber from "../utils/utils";
 
-exports.create = async (req, res) => {
+const SECRET_KEY: string = process.env.SECRET_KEY || "thisIsNotSafe";
+
+export async function create(req: Request, res: Response) {
   const { email, password } = req.body;
   const user = await User.findOne({ email: email });
 
@@ -30,7 +32,7 @@ exports.create = async (req, res) => {
   }
 };
 
-exports.login = async (req, res) => {
+export async function login(req: Request, res: Response) {
   try {
     const { email, password } = req.body;
 
@@ -46,17 +48,23 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.profile = async (req, res) => {
+export async function profile(req: Request, res: Response) {
   try {
-    const { id, name, email, image, offers, favourite } = req.user;
-    const user = { id, name, email, image, offers, favourite };
+    const user = req.user;
+    if (!user) {
+      throw new Error("User not found");
+    }
+    const { id, name, email, image, offers, favourite } = user;
+    // const user = { id, name, email, image, offers, favourite };
     res.status(200).send(user);
   } catch (error) {
     res.status(404).send({ error, data: "Resource not found" });
   }
 };
 
-// exports.signup = async (req, res) => {
+
+//TODO: this is old code, check if it is needed
+// export async function signup(req: Request, res: ) {
 //   try {
 //     const newUser = await User.create(req.body);
 //     res.status(201);
@@ -72,7 +80,7 @@ exports.profile = async (req, res) => {
 //   }
 // };
 
-// exports.getAllUsers = (req, res) => {
+// export async function getAllUsers = (req: Request, res: ) {
 //   res.status(500);
 //   res.send({
 //     data: null,
