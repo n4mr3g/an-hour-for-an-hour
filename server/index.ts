@@ -7,7 +7,7 @@ import router from "./router";
 declare global {
   namespace Express {
     interface Request {
-      user?: Record<string, any>
+      user?: Record<string, any>;
     }
   }
 }
@@ -16,7 +16,7 @@ const app = express();
 const port = 4000;
 
 const corsConfig: cors.CorsOptions = {
-  origin: "http://localhost:4000",
+  origin: "http://localhost:5173",
   credentials: true,
 };
 
