@@ -1,9 +1,10 @@
 import { useState } from "react";
 import "./ad-listing.css";
+import { Offer } from "../../dataTypes";
 
 //TODO find a better name for ad
 
-export default function Ad({ ad }) {
+export default function Ad({ ad }: {ad: Offer}) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
