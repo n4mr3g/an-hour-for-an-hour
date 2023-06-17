@@ -8,19 +8,20 @@ const authMiddleware = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const authHeaders = req.headers["authorization"];
-  if (!authHeaders) return res.sendStatus(403);
-  const token = authHeaders.split(" ")[1];
-  console.log(authHeaders)
 
   try {
+    const authHeaders: string = req.headers["Authorization"]?.toString() || "";
+    if (!authHeaders) return res.sendStatus(403);
+
+    const token: string = authHeaders.split(" ")[1];
     const jwtVer = jwt.verify(token, SECRET_KEY);
-    // console.log(jwtVer);
     const user = await User.findOne({ _id: jwtVer.id }).select({ password: 0 });
-    console.log(user);
+
     if (!user) return res.sendStatus(401);
+
     req.user = user;
     next();
+
   } catch (error) {
     console.log(error);
     res.sendStatus(401);
