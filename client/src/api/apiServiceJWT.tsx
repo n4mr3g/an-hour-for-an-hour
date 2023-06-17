@@ -30,8 +30,7 @@ const login = (user: User) => {
       return response;
     })
     .then((response) => {
-      localStorage.setItem('accessToken', response.accessToken)
-
+      localStorage.setItem('accessToken', response.accessToken);
     })
     .catch((err) => console.log(err));
 };
