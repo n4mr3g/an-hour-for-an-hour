@@ -11,11 +11,12 @@ const authMiddleware = async (
   const authHeaders = req.headers["authorization"];
   if (!authHeaders) return res.sendStatus(403);
   const token = authHeaders.split(" ")[1];
+  console.log(authHeaders)
 
   try {
-    const { id } = jwt.verify(token, SECRET_KEY);
-    console.log(id);
-    const user = await User.findOne({ _id: id });
+    const jwtVer = jwt.verify(token, SECRET_KEY);
+    // console.log(jwtVer);
+    const user = await User.findOne({ _id: jwtVer.id }).select({ password: 0 });
     console.log(user);
     if (!user) return res.sendStatus(401);
     req.user = user;

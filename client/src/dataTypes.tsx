@@ -1,4 +1,4 @@
-export interface Offer {
+export type Offer = {
   author: string,
   // authorId: String,
   title: string,
@@ -8,7 +8,7 @@ export interface Offer {
   type: string,
 }
 
-export interface User {
+export type User = {
   name: string,
   email: string,
   password: string,

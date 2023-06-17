@@ -45,15 +45,15 @@ export async function postOffer(req: Request, res: Response) {
 export async function getOffers(req: Request, res: Response) {
   try {
     console.log("getting all offers from db");
-    const allOffers = await Offer.find();
+    const allOffers = await Offer.find({});
     // console.log(allOffers, 'allOffers')
+    // res.setHeader('Content-Type', 'application/json');
     res.status(200);
     // res.send({
     //   data: allOffers,
     //   error: null,
     // });
     res.send(allOffers);
-    res.setHeader('Content-Type', 'application/json');
   } catch (error) {
     res.status(500);
     console.error(error);

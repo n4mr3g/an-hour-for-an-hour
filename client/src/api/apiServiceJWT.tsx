@@ -25,7 +25,14 @@ const login = (user: User) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(user),
   })
-    .then((res) => res.json())
+    .then((res) => {
+      const response = res.json();
+      return response;
+    })
+    .then((response) => {
+      localStorage.setItem('accessToken', response.accessToken)
+
+    })
     .catch((err) => console.log(err));
 };
 

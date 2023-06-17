@@ -34,7 +34,7 @@ export default function App() {
 
   function findOffers(query: string): void {
     const filteredResult = offers.filter((offer: Offer) =>
-      offer.offer.toLowerCase().includes(query),
+      offer.title.toLowerCase().includes(query),
     );
     setOffers(filteredResult);
   }
@@ -57,7 +57,7 @@ export default function App() {
       <Navigation findOffers={findOffers} />
       <div className="app-view">
         <Filter />
-        <OffersList offers={offers ? offers : []} />
+        <OffersList offers={offers} />
       </div>
     </div>
   );
