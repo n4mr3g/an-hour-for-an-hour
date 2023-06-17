@@ -1,18 +1,16 @@
 export interface Offer {
-  author: String,
+  author: string,
   // authorId: String,
-  offer: String,
+  title: string,
   image: string,
-  message: String,
-  comment: String,
-  type: String,
+  message: string,
+  comment: string,
+  type: string,
 }
 
 export interface User {
-  name: String,
-  email: String,
-  password: String,
+  name: string,
+  email: string,
+  password: string,
   image: string
 }
-
-

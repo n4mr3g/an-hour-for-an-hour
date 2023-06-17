@@ -1,4 +1,4 @@
-import Ad from "../Ad/Ad";
+import Ad from "../OfferCard/OfferCard";
 export default function MyList() {
   const mocks = [
     {

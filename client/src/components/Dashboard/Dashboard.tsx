@@ -1,9 +1,9 @@
-import "./dashboard.css";
+import "./Dashboard.css";
 import Navigation from "../Navigation/Navigation";
 import Menu from "../Menu/Menu";
 import { Outlet } from "react-router-dom";
 import { storeApp } from "../../store";
-import findOffers from '../../App.jsx'
+import findOffers from "../../App.jsx";
 
 export default function Dashboard() {
   // const user = useSelector((state) => state.userInfo);

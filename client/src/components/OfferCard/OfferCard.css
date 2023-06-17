@@ -1,10 +1,10 @@
-.ad-container {
+.offer-container {
   width: 600px;
   display: inline-flex;
   flex-direction: column;
   margin: 20px;
 }
-.ad-container-top {
+.offer-container-top {
   display: inline-flex;
   align-items: center;
   gap: 20px;
@@ -18,16 +18,16 @@
   border-bottom: none;
 }
 
-.ad-image {
+.offer-image {
   height: 50px;
   border-radius: 50px;
 }
 
-.ad-author {
+.offer-author {
   font-size: 10px;
 }
 
-.ad-type {
+.offer-type {
   background-color: #828282;
   color: white;
   padding: 5px;
@@ -37,7 +37,7 @@
   letter-spacing: px;
 }
 
-.ad-type-expand {
+.offer-type-expand {
   display: flex;
   gap: 10px;
 }
@@ -46,7 +46,7 @@
   cursor: pointer;
 }
 
-.ad-container-bottom {
+.offer-container-bottom {
   display: flex;
   align-items: center;
   gap: 20px;
@@ -57,13 +57,13 @@
   justify-content: space-between;
 }
 
-.ad-info {
+.offer-info {
   border-left: 1.5px solid black;
   border-right: 1.5px solid black;
   padding: 10px;
 }
 
-.ad-user-tagline {
+.offer-user-tagline {
   display: flex;
   flex-direction: row;
   align-items: center;

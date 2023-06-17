@@ -1,4 +1,4 @@
-import Ad from "../Ad/Ad";
+import OfferCard from "../OfferCard/OfferCard";
 import { Offer } from "../../dataTypes";
 import { useState, useEffect } from "react";
 
@@ -11,7 +11,7 @@ export default function OffersList({ offers }: { offers: Offer[] }) {
     <>
       <div className="listing">
         {offers.map((offer) => (
-          <Ad ad={offer} key={crypto.randomUUID()}></Ad>
+          <OfferCard offerEl={offer} key={crypto.randomUUID()}></OfferCard>
         ))}
       </div>
     </>

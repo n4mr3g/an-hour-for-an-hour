@@ -1,24 +1,24 @@
 import { useState } from "react";
-import "./ad-listing.css";
 import { Offer } from "../../dataTypes";
+import "./OfferCard.css";
 
 //TODO find a better name for ad
 
-export default function Ad({ ad }: {ad: Offer}) {
+export default function OfferCard({ offerEl }: {offerEl: Offer}) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className="ad-container">
-      <div className="ad-container-top">
-        <div className="ad-user-tagline">
-          <img className="ad-image" src={ad.image} alt="user" />
+    <div className="offer-container">
+      <div className="offer-container-top">
+        <div className="offer-user-tagline">
+          <img className="offer-image" src={offerEl.image} alt={offerEl.title} />
           <div>
-            <p className="ad-offer">{ad.offer}</p>
-            <p className="ad-author">{ad.author}</p>
+            <p className="offer-offer">{offerEl.title}</p>
+            <p className="offer-author">{offerEl.author}</p>
           </div>
         </div>
-        <div className="ad-type-expand">
-          <div className="ad-type">{ad.type}</div>
+        <div className="offer-type-expand">
+          <div className="offer-type">{offerEl.type}</div>
           <span
             className="material-symbols-outlined expand"
             onClick={() => {
@@ -29,11 +29,11 @@ export default function Ad({ ad }: {ad: Offer}) {
           </span>
         </div>
       </div>
-      {isExpanded && <div className="ad-info">{ad.message}</div>}
-      <div className="ad-container-bottom">
+      {isExpanded && <div className="offer-info">{offerEl.message}</div>}
+      <div className="offer-container-bottom">
         <button className="connect-btn">Message</button>
         <div className="interests-logo-message">
-          <p> {ad.comment} </p>
+          <p> {offerEl.comment} </p>
           <span className="material-symbols-outlined favorite">
             playlist_add_check
           </span>

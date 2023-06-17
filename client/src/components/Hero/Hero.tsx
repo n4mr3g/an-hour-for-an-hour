@@ -1,4 +1,4 @@
-import "./hero.css";
+import "./Hero.css";
 import Ski from "../../assets/ski.mp4";
 import Dance from "../../assets/dance.mp4";
 import Cook from "../../assets/cook.mp4";

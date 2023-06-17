@@ -1,43 +1,50 @@
-import "./form.css";
+import "./Form.css";
 import { useState } from "react";
 import { Offer } from "../../dataTypes";
 
 import { postOffer } from "../../api/apiService";
 import { useNavigate } from "react-router-dom";
 
+import * as DOMPurify from "dompurify";
+
 export default function Form() {
-  const [offer, setOffer] = useState("");
-  const [type, setType] = useState("Teach");
+  const [title, setTitle] = useState("");
+  const [type, setType] = useState("");
   const [message, setMessage] = useState("");
   const [comment, setComment] = useState("");
-  const [author, setAuthor] = useState("John Doe");
+  const [image, setImage] = useState("");
+  const [author, setAuthor] = useState("");
+
   const navigate = useNavigate();
+
+  let clean = DOMPurify.sanitize;
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!offer || !type || !message || !comment) {
+    if (!title || !type || !message || !comment) {
+      //TODO: change alert to modal
       alert("Please enter details correctly");
       return;
     }
     let newOffer: Offer = {
-      offer: offer,
-      type: type,
-      message: message,
-      comment: comment,
-      author: author,
-      image: "",
+      title: clean(title),
+      type: clean(type),
+      message: clean(message),
+      comment: clean(comment),
+      author: clean(author),
+      image: clean(image),
     };
     postOffer(newOffer);
-    setOffer("");
-    setType("");
-    setMessage("");
-    setComment("");
+    event.currentTarget.reset();
     navigate("/app");
   }
   return (
     <div className="form-container">
+      {/* DOMPurify: */}
+      <script type="text/javascript" src="dist/purify.min.js"></script>
+
       <form className="form-itself" onSubmit={handleSubmit}>
-        <div className="form--title"> Create your offer </div>
+        <div className="form-title"> Create your offer </div>
         <div className="input-group">
           <label className="input-label" htmlFor="title">
             title
@@ -46,10 +53,10 @@ export default function Form() {
             className="input-box"
             type="text"
             name="title"
-            value={offer}
-            placeholder="Insert a title..."
+            value={title}
+            placeholder="Enter title"
             onChange={(e) => {
-              setOffer(e.target.value);
+              setTitle(e.target.value);
             }}
           />
         </div>
@@ -83,7 +90,7 @@ export default function Form() {
         </div>
         <div className="input-group">
           <label className="input-label" htmlFor="substitute">
-            Open to different learning offer ?
+            Open to learn something different?
           </label>
           <textarea
             id="substitute"

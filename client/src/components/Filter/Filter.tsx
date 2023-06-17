@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./filter.css";
+import "./Filter.css";
 export default function Filter() {
   const [teachSelected, setTeachSelected] = useState(false);
   const [learnSelected, setLearnSelected] = useState(false);
