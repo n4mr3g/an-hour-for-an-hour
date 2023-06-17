@@ -2,7 +2,6 @@ import { User } from "../dataTypes";
 
 const SERVER_URL = "http://localhost:4000";
 
-
 const signup = (user: User) => {
   return fetch(`${SERVER_URL}/signup`, {
     method: "POST",
@@ -14,8 +13,6 @@ const signup = (user: User) => {
     .then((res) => res.json())
     .catch((err) => console.log(err));
 };
-
-
 
 const login = (user: User) => {
   return fetch(`${SERVER_URL}/login`, {
@@ -30,14 +27,13 @@ const login = (user: User) => {
       return response;
     })
     .then((response) => {
-      localStorage.setItem('accessToken', response.accessToken);
+      localStorage.setItem("accessToken", response.accessToken);
     })
     .catch((err) => console.log(err));
 };
 
-
 const profile = (accessToken: string) => {
-  return fetch(`${SERVER_URL}/me`, {
+  return fetch(`${SERVER_URL}/profile`, {
     method: "GET",
     credentials: "include",
     mode: "cors",
@@ -47,13 +43,11 @@ const profile = (accessToken: string) => {
     },
   })
     .then((res) => res.json())
-    .catch((err) => console.log(err));
+    .catch((err) => console.log("Error", err));
 };
-
 
 const logout = (tokenName: string) => {
   localStorage.removeItem(tokenName);
 };
 
-export { signup, login, profile, logout }
-
+export { signup, login, profile, logout };

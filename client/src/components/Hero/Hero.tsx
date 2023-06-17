@@ -4,8 +4,8 @@ import Dance from "../../assets/dance.mp4";
 import Cook from "../../assets/cook.mp4";
 import Study from "../../assets/study.mp4";
 import { random } from "../../utils/utils";
-
 import { Link } from "react-router-dom";
+
 
 export default function Hero() {
   const videos = [Dance, Ski, Cook, Study];

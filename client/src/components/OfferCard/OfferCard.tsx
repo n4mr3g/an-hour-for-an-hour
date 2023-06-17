@@ -4,16 +4,20 @@ import "./OfferCard.css";
 
 //TODO find a better name for ad
 
-export default function OfferCard({ offerEl }: {offerEl: Offer}) {
+export default function OfferCard({ offerEl }: { offerEl: Offer }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
     <div className="offer-container">
       <div className="offer-container-top">
         <div className="offer-user-tagline">
-          <img className="offer-image" src={offerEl.image} alt={offerEl.title} />
+          <img
+            className="offer-image"
+            src={offerEl.image}
+            alt={offerEl.title}
+          />
           <div>
-            <p className="offer-offer">{offerEl.title}</p>
+            <p className="offer-title">{offerEl.title}</p>
             <p className="offer-author">{offerEl.author}</p>
           </div>
         </div>

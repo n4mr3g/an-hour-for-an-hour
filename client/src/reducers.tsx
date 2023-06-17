@@ -1,7 +1,7 @@
-import { AnyAction } from 'redux';
-import { User } from './dataTypes';
+import { AnyAction } from "redux";
+import { Offer, User } from "./dataTypes";
 
-const offersReducer = (state: string[] = [], action: AnyAction) => {
+const offersReducer = (state: Offer[] = [], action: AnyAction) => {
   switch (action.type) {
     case "SET_OFFERS":
       state = [...action.payload];
@@ -12,13 +12,15 @@ const offersReducer = (state: string[] = [], action: AnyAction) => {
   }
 };
 
-
-const userInfoReducer = (state: User = {
-  name: '',
-  email: '',
-  password: '',
-  image: ''
-}, action: AnyAction) => {
+const userInfoReducer = (
+  state: User = {
+    password: "",
+    name: "",
+    email: "",
+    image: "",
+  },
+  action: AnyAction,
+) => {
   switch (action.type) {
     case "LOG_IN":
       state = {

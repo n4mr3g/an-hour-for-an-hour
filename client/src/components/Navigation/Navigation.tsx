@@ -8,7 +8,6 @@ import { storeApp } from "../../store";
 import { loginAction } from "../../actions";
 
 export default function Navigation({ findOffers }: { findOffers: Function }) {
-
   const [listCount, setListCount] = useState<number>(8);
 
   // const user = useSelector((state) => state.userInfo);
@@ -23,44 +22,49 @@ export default function Navigation({ findOffers }: { findOffers: Function }) {
   }
 
   return (
-    <div className="navigation-container">
-      <div className="logo same-width ">Hour One</div>
-      <SearchBar findOffers={findOffers} />
-      <div className="nav-options same-width ">
-        <div className="mylist-wrapper">
-          {user.name && (
-            <>
-              <Link to={"/app/dashboard/profile"} className="my-list">
-                Dashboard
-              </Link>
-              <div className={listCount > 0 ? "list-count" : ""}>
-                {listCount > 0 ? listCount : ""}
-              </div>
-              <img className="user-image" src={user.image} alt="user" />
-              <Link
-                onClick={handleSignOut}
-                className="signout-link"
-                to={"/app/signup"}
-              >
-                {" "}
-                Log Out
-              </Link>
-            </>
-          )}
-          {!user.name && (
-            <>
-              <Link className="signup-link" to={"/app/signup"}>
-                {" "}
-                Sign Up
-              </Link>
-              <Link className="signin-link" to={"/app/signin"}>
-                {" "}
-                Sign in
-              </Link>
-            </>
-          )}
+    <nav>
+      <div className="navigation-container">
+        <a href="/app" className="logo same-width ">
+          Hour One
+        </a>
+        {/* <div className="logo same-width ">Hour One</div> */}
+        <SearchBar findOffers={findOffers} />
+        <div className="nav-options same-width ">
+          <div className="mylist-wrapper">
+            {user && (
+              <>
+                <Link to={"/app/dashboard/profile"} className="my-list">
+                  Dashboard
+                </Link>
+                <div className={listCount > 0 ? "list-count" : ""}>
+                  {listCount > 0 ? listCount : ""}
+                </div>
+                <img className="user-image" src={user.image} alt={user.name} />
+                <Link
+                  onClick={handleSignOut}
+                  className="signout-link"
+                  to={"/app/signup"}
+                >
+                  {" "}
+                  Log Out
+                </Link>
+              </>
+            )}
+            {!user.name && (
+              <>
+                <Link className="signup-link" to={"/app/signup"}>
+                  {" "}
+                  Sign Up
+                </Link>
+                <Link className="signin-link" to={"/app/signin"}>
+                  {" "}
+                  Sign in
+                </Link>
+              </>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </nav>
   );
 }

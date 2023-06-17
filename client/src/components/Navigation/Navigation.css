@@ -1,9 +1,13 @@
 .navigation-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin: 40px 40px;
+  justify-content: space-around;
+  /* margin: 40px 40px; */
   margin-bottom: 50px;
+  /* background-color: red; */
+  height: 80px;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5);
+  padding: 20px 0;
   /* FIXME this might cause problem for menu */
 }
 
@@ -13,7 +17,17 @@
 .logo {
   font-weight: 900;
   letter-spacing: 2px;
-  font-size: 20px;
+  font-size: 30px;
+  text-decoration: none;
+  width: fit-content;
+  color: black;
+  border-radius: 3px;
+  padding: 2px 10px;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: black;
+    color: white;
+  }
 }
 
 .nav-options {

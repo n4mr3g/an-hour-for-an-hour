@@ -21,6 +21,8 @@
 .offer-image {
   height: 50px;
   border-radius: 50px;
+  font-size: 10px;
+  text-align: center;
 }
 
 .offer-author {
@@ -34,7 +36,6 @@
   border-radius: 5px;
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: px;
 }
 
 .offer-type-expand {
