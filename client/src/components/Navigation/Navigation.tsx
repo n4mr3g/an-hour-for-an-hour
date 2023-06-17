@@ -2,15 +2,15 @@ import "./Navigation.css";
 import SearchBar from "../SearchBar/SearchBar";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { logout } from "../../api/OLD apiServiceJWT";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { logout } from "../../api/apiServiceJWT";
 import { storeApp } from "../../store";
 import { loginAction } from "../../actions";
 
 export default function Navigation({ findOffers }: { findOffers: Function }) {
   const [listCount, setListCount] = useState<number>(8);
 
-  // const user = useSelector((state) => state.userInfo);
+  // const user = useSelector(userInfo, shallowEqual);
   const user = storeApp.getState().userInfo;
 
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ export default function Navigation({ findOffers }: { findOffers: Function }) {
         <SearchBar findOffers={findOffers} />
         <div className="nav-options same-width ">
           <div className="mylist-wrapper">
-            {user && (
+            {user.email && (
               <>
                 <Link to={"/app/dashboard/profile"} className="my-list">
                   Dashboard

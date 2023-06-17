@@ -1,5 +1,5 @@
 import { Offer } from "../dataTypes";
-import { signup, login, profile, logout } from "./OLD apiServiceJWT";
+import { signup, login } from "./apiServiceJWT";
 import { useDispatch } from "react-redux";
 import { set, loginAction } from "../actions";
 
@@ -48,16 +48,16 @@ export async function fetchOffersFromServer(): Promise<Offer[]> {
   const accessToken = localStorage.getItem("accessToken");
 
   // Function to make jwt profile call
-  const getProfile = async (token: string) => {
-    // This 'profile' function checks in the backend if the token is valid
-    const userProfile = await profile(token);
-    if (userProfile) {
-      // dispatch(loginAction(true));
-    }
-    return userProfile ? userProfile : null;
-  };
+  // const getProfile = async (token: string) => {
+  //   // This 'profile' function checks in the backend if the token is valid
+  //   const userProfile = await profile(token);
+  //   if (userProfile) {
+  //     // dispatch(loginAction(true));
+  //   }
+  //   return userProfile ? userProfile : null;
+  // };
 
-  getProfile(accessToken || "");
+  // getProfile(accessToken || "");
 
   // const res = response.json();
   const res: Offer[] = await response.json();

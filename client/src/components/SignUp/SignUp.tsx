@@ -1,7 +1,7 @@
 import Navigation from "../Navigation/Navigation";
 import "./signup.css";
 import auth from "../../utils/auth";
-import { signup, profile } from "../../api/OLD apiServiceJWT.jsx";
+import { signup } from "../../api/apiServiceJWT.jsx";
 
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
@@ -35,7 +35,7 @@ export default function SignUp() {
     };
 
     const res: string | void = await signup(newUserData);
-    if (res.status === 409 || !) {
+    if (res === '') {
       console.log("!res == true");
       alert("User already exists");
       setName("");

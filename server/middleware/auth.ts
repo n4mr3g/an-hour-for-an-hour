@@ -10,7 +10,8 @@ const authMiddleware = async (
 ) => {
 
   try {
-    const authHeaders: string = req.headers["Authorization"]?.toString() || "";
+    // console.log(req.headers);
+    const authHeaders: string = req.headers["authorization"]?.toString() || "";
     if (!authHeaders) return res.sendStatus(403);
 
     const token: string = authHeaders.split(" ")[1];

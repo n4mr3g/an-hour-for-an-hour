@@ -14,3 +14,9 @@ export type User = {
   password: string,
   image: string
 }
+
+
+export type LoginData = {
+  email: string,
+  password: string,
+}

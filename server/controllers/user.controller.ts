@@ -9,7 +9,7 @@ const SECRET_KEY: string = process.env.SECRET_KEY || "thisIsNotSafe";
 export async function create(req: Request, res: Response) {
   const { email, password } = req.body;
   // console.log("herghfjfghe");
-  console.log(req.body);
+  // console.log(req.body);
   try {
     const user = await User.findOne({ email: email });
     if (user) {
@@ -44,8 +44,9 @@ export async function login(req: Request, res: Response) {
     const validatePass = await bcrypt.compare(password, user?.password);
     if (!validatePass) throw new Error();
     const accessToken = jwt.sign({ id: user.id }, SECRET_KEY);
+    console.log(accessToken, 'login')
     res.status(200);
-    res.send({ accessToken });
+    res.send(JSON.stringify(accessToken));
   } catch (error) {
     res.status(401);
     res.send({ error, data: "User not found" });

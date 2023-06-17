@@ -1,6 +1,6 @@
 import Navigation from "../Navigation/Navigation";
 import "./SignIn.css";
-import { login, profile } from "../../api/OLD apiServiceJWT.jsx";
+import { login, profile } from "../../api/apiServiceJWT.jsx";
 
 import { useNavigate } from "react-router-dom";
 import { loginAction } from "../../actions.js";
@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { storeApp } from "../../store.js";
 
 import findOffers from "../../App.jsx";
+import { User, LoginData } from "../../dataTypes.jsx";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -19,33 +20,40 @@ export default function SignIn() {
   // const userInfo = useSelector((state) => state.userInfo);
   const userInfo = storeApp.getState().userInfo;
 
-  //FIXME
-  //@ts-ignore
-  async function handleSubmit(event) {
+
+  // type ResponseLogin = {
+
+  // }
+
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!email || !password) {
       alert("Please enter details correctly");
       return;
     }
-    //FIXME
-    //@ts-ignore
-    const res = await login({
-      email,
-      password,
-    });
-    if (res.error) {
-      alert(res.data);
+
+    const loginData: LoginData = {
+      email: email,
+      password: password,
+    }
+
+
+    const res: string = await login(loginData);
+    if (res === '') {
+      alert('bad credentials.');
       setEmail("");
       setPassword("");
     } else {
-      const { accessToken } = res;
+      const accessToken = res;
       localStorage.setItem("accessToken", accessToken);
       setEmail("");
       setPassword("");
 
       const prof = await profile(accessToken);
-      dispatch(loginAction(prof));
-
+      // dispatch(loginAction(prof));
+      storeApp.dispatch(loginAction(true));
+      console.log('log in')
       navigate("/app");
     }
   }

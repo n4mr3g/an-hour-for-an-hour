@@ -1,5 +1,4 @@
 import { User } from "../dataTypes";
-import fetch, { Response as FetchResponse } from "node-fetch";
 
 const SERVER_URL = "http://localhost:4000";
 
@@ -7,7 +6,7 @@ interface LoginResponse {
   accessToken: string;
 }
 
-const signup = async (user: User): Promise<FetchResponse> => {
+const signup = async (user: User): Promise<Response> => {
   return await fetch(`${SERVER_URL}/signup`, {
     method: "POST",
     // credentials: "include",

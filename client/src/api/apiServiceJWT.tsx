@@ -1,4 +1,4 @@
-import { User } from "../dataTypes";
+import { LoginData, User } from "../dataTypes";
 
 const SERVER_URL = "http://localhost:4000";
 
@@ -14,13 +14,13 @@ const signup = (user: User) => {
     .catch((err) => console.log(err));
 };
 
-const login = (user: User) => {
+const login = (loginData: LoginData) => {
   return fetch(`${SERVER_URL}/login`, {
     method: "POST",
     credentials: "include",
     mode: "cors",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(user),
+    body: JSON.stringify(loginData),
   })
     .then((res) => {
       const response = res.json();
@@ -28,6 +28,7 @@ const login = (user: User) => {
     })
     .then((response) => {
       localStorage.setItem("accessToken", response.accessToken);
+      return response;
     })
     .catch((err) => console.log(err));
 };
@@ -39,7 +40,7 @@ const profile = (accessToken: string) => {
     mode: "cors",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
+      authorization: `Bearer ${accessToken}`,
     },
   })
     .then((res) => res.json())
@@ -50,4 +51,4 @@ const logout = (tokenName: string) => {
   localStorage.removeItem(tokenName);
 };
 
-export { signup, login, profile, logout };
+export { signup, login, logout, profile };

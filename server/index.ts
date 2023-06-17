@@ -31,10 +31,11 @@ const corsConfig: cors.CorsOptions = {
   //     callback(new Error('Not allowed by CORS'));
   //   }
   // },
-  origin: ['http://localhost:5173', 'http://localhost:5173/signup', 'http://localhost:5173/signin', 'http://localhost:5173/offer', 'http://localhost:5173/app'],
+  origin: ['http://localhost:5173'],
+  // origin: ['http://localhost:5173', 'http://localhost:5173/signup', 'http://localhost:5173/app/signin', 'http://localhost:5173/offer', 'http://localhost:5173/app'],
   methods: ["GET", "POST", "DELETE", "UPDATE"],
   // origin: ['http://localhost:5173'],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  allowedHeaders: ["Content-Type", "authorization"],
   credentials: true,
 };
 
