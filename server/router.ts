@@ -1,12 +1,12 @@
 import express, { Router } from "express";
 
-import { getOffer, postOffer } from "./controllers/offer.controller";
+import { getOffers, postOffer } from "./controllers/offer.controller";
 import { create, login, profile } from "./controllers/user.controller";
 import authMiddleware from "./middleware/auth";
 
 const router: Router = express.Router();
 
-router.get("/offer", getOffer);
+router.get("/offer", getOffers);
 router.post("/offer", postOffer);
 
 router.post("/signup", create);

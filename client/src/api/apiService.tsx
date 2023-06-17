@@ -62,5 +62,5 @@ export async function fetchOffersFromServer(): Promise<Offer[]> {
   // const res = response.json();
   const res: Offer[] = await response.json();
   console.log(res, "res");
-  return res;
+  return res ? res : [];
 }

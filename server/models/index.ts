@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const url = process.env.DATABASE_URL;
+
 async function main() {
   await mongoose.connect(url, {
     useNewUrlParser: true,

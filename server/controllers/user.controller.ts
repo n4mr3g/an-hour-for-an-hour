@@ -27,6 +27,7 @@ export async function create(req: Request, res: Response) {
 
     const accessToken = jwt.sign({ id }, SECRET_KEY);
     res.status(201).send({ accessToken });
+    res.setHeader('Content-Type', 'application/json');
   } catch (error) {
     res.status(400).send({ error, data: "Could not create user" });
   }
@@ -42,6 +43,7 @@ export async function login(req: Request, res: Response) {
     const accessToken = jwt.sign({ id: user.id }, SECRET_KEY);
     res.status(200);
     res.send({ accessToken });
+    res.setHeader('Content-Type', 'application/json');
   } catch (error) {
     res.status(401);
     res.send({ error, data: "User not found" });
@@ -57,6 +59,7 @@ export async function profile(req: Request, res: Response) {
     const { id, name, email, image, offers, favourite } = user;
     // const user = { id, name, email, image, offers, favourite };
     res.status(200).send(user);
+    res.setHeader('Content-Type', 'application/json');
   } catch (error) {
     res.status(404).send({ error, data: "Resource not found" });
   }

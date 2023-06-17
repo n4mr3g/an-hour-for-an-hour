@@ -19,8 +19,8 @@ export default function App() {
 
   function loadOffers() {
     fetchOffersFromServer().then((offersFromServer) =>
-      setOffers(offersFromServer),
-    );
+      offersFromServer ? setOffers(offersFromServer) : setOffers([]),
+    ).catch(e => console.log(e));
   }
   // let offersPromise: Promise<void | Offer[]> = getOffersFromDB()
   // .then(offers => {
@@ -57,7 +57,7 @@ export default function App() {
       <Navigation findOffers={findOffers} />
       <div className="app-view">
         <Filter />
-        <OffersList offers={offers} />
+        <OffersList offers={offers ? offers : []} />
       </div>
     </div>
   );
