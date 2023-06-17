@@ -8,10 +8,13 @@ const SECRET_KEY: string = process.env.SECRET_KEY || "thisIsNotSafe";
 
 export async function create(req: Request, res: Response) {
   const { email, password } = req.body;
+  // console.log("herghfjfghe");
+  console.log(req.body);
   try {
     const user = await User.findOne({ email: email });
-    if (user)
+    if (user) {
       return res.status(409).send({ error: "409", data: "User already exits" });
+    }
 
     if (password === "") throw new Error();
 
@@ -26,7 +29,9 @@ export async function create(req: Request, res: Response) {
     });
     const { id } = await newUser.save();
     const accessToken = jwt.sign({ id }, SECRET_KEY);
-    res.status(201).send({ accessToken });
+    console.log("accessToken", accessToken);
+    res.status(201)
+    res.send(JSON.stringify(accessToken));
   } catch (error) {
     res.status(400).send({ error, data: "Could not create user" });
   }

@@ -1,6 +1,6 @@
 import Navigation from "../Navigation/Navigation";
 import "./SignIn.css";
-import { login, profile } from "../../api/apiServiceJWT";
+import { login, profile } from "../../api/OLD apiServiceJWT.jsx";
 
 import { useNavigate } from "react-router-dom";
 import { loginAction } from "../../actions.js";
@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { storeApp } from "../../store.js";
 
-import findOffers from '../../App.jsx'
+import findOffers from "../../App.jsx";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");

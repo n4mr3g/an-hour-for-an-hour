@@ -3,7 +3,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { logout } from "../../api/apiServiceJWT";
+import { logout } from "../../api/OLD apiServiceJWT";
 import { storeApp } from "../../store";
 import { loginAction } from "../../actions";
 

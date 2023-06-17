@@ -8,7 +8,7 @@ const router: Router = express.Router();
 router.get("/offer", getOffers);
 router.post("/offer", authMiddleware, postOffer);
 
-router.post("/signup", authMiddleware, create);
+router.post("/signup", create);
 router.post("/login", authMiddleware, login);
 //TODO: check if we need this 'profile' route
 // router.get("/profile", authMiddleware, profile);

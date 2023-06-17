@@ -1,16 +1,15 @@
 import Navigation from "../Navigation/Navigation";
 import "./signup.css";
 import auth from "../../utils/auth";
-import { signup, profile } from "../../api/apiServiceJWT";
+import { signup, profile } from "../../api/OLD apiServiceJWT.jsx";
 
 import { useNavigate } from "react-router-dom";
-
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../../actions.js";
 import { storeApp } from "../../store.js";
-
-import findOffers from '../../App.jsx'
+import findOffers from "../../App.jsx";
+import { User } from "../../dataTypes.jsx";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -22,41 +21,43 @@ export default function SignUp() {
   const userInfo = storeApp.getState().userInfo;
 
   //FIXME
-  //@ts-ignore
-  async function handleSubmit(event) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!name || !email || !password) {
       alert("Please enter details correctly");
       return;
     }
-    //FIXME
-    //@ts-ignore
-    const res = await signup({
-      name,
-      email,
-      password,
-    });
-    if (res.error) {
-      alert(res.data);
+    const newUserData: User = {
+      name: name,
+      email: email,
+      password: password,
+      image: "",
+    };
+
+    const res: string | void = await signup(newUserData);
+    if (res.status === 409 || !) {
+      console.log("!res == true");
+      alert("User already exists");
       setName("");
       setEmail("");
       setPassword("");
     } else {
-      const { accessToken } = res;
+      console.log("RES BODY :", res);
+      const accessToken = res as string;
+      console.log("accessToken", accessToken);
       localStorage.setItem("accessToken", accessToken);
       setName("");
       setEmail("");
       setPassword("");
 
       //function to make jwt profile call
-      const getProfile = async (token: string) => {
-        const prof = await profile(token);
-        dispatch(loginAction(prof));
-      };
+      // const getProfile = async (token: string) => {
+      //   const prof = await profile(token);
+      //   dispatch(loginAction(prof));
+      // };
 
-      getProfile(accessToken);
-
-      navigate("/app");
+      // getProfile(accessToken);
+      if (accessToken) navigate("/app/signin");
     }
   }
   return (
