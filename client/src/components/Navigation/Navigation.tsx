@@ -2,10 +2,9 @@ import "./Navigation.css";
 import SearchBar from "../SearchBar/SearchBar";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+
 import { logout } from "../../api/apiServiceJWT";
-import { storeApp } from "../../redux/store";
-import { loginAction } from "../../redux/actions";
+
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { UserFromBackend } from "../../dataTypes";
 import { logoutUser } from "../../redux/userInfoSlice";
@@ -21,11 +20,10 @@ export default function Navigation({ findOffers }: { findOffers: Function }) {
   const dispatch = useAppDispatch();
   function handleSignOut() {
     logout("accessToken");
-    // dispatch(profile(''));
-    // dispatch(loginAction(false));
     dispatch(logoutUser(user));
     navigate("/");
   }
+
 
   return (
     <nav>
@@ -33,7 +31,6 @@ export default function Navigation({ findOffers }: { findOffers: Function }) {
         <Link to={"/app"} className="logo same-width">
           Hour One
         </Link>
-        {/* <div className="logo same-width ">Hour One</div> */}
         <SearchBar findOffers={findOffers} />
         <div className="nav-options same-width ">
           <div className="mylist-wrapper">

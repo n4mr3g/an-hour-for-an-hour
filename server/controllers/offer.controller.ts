@@ -1,7 +1,6 @@
 import { OfferModel } from "../models/index";
 import { Request, Response } from "express";
 import Crypto from "crypto";
-// const {randomNumber} = require("../utils/utils");
 import randomNumber from "../utils/utils";
 
 export async function postOffer(req: Request, res: Response) {

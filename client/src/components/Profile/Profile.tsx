@@ -1,11 +1,9 @@
-import { storeApp } from "../../redux/store";
+import { UserFromBackend } from "../../dataTypes";
+import { useAppSelector } from "../../redux/hooks";
 import Button from "../Button/Button";
 import "./Profile.css";
-
-// import { useSelector } from "react-redux";
 export default function Profile() {
-  // const user = useSelector((state) => state.userInfo);
-  const user = storeApp.getState().userInfo;
+  const user: UserFromBackend = useAppSelector((state) => state.userInfo[0]);
 
   return (
     <div className="profile_container">

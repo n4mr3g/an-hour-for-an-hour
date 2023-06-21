@@ -66,10 +66,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-// let store = legacy_createStore(
-//   reducers
-//   // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-// );
+
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <Provider store={storeApp}>
