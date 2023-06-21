@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { offersReducer, userInfoReducer } from './reducers.tsx'
+import userInfoReducer from './userInfoSlice'
+// import { offersReducer, userInfoReducer } from './reducers.tsx'
 
 export const storeApp = configureStore({
   reducer: {
-    offers: offersReducer,
-    userInfo: userInfoReducer,
+    userInfo: userInfoReducer
   }
 })
 

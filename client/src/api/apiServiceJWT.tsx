@@ -28,7 +28,7 @@ const login = (loginData: LoginData) => {
     })
     .then((response) => {
       localStorage.setItem("accessToken", response.accessToken);
-      return response;
+      return response.user;
     })
     .catch((err) => console.log(err));
 };

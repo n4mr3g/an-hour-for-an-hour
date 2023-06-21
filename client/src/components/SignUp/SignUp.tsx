@@ -6,8 +6,8 @@ import { signup } from "../../api/apiServiceJWT.jsx";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAction } from "../../actions.js";
-import { storeApp } from "../../store.js";
+import { loginAction } from "../../redux/actions.js";
+import { storeApp } from "../../redux/store.js";
 import findOffers from "../../App.jsx";
 import { User } from "../../dataTypes.jsx";
 
@@ -16,13 +16,14 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   let navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // const userInfo = useSelector((state) => state.userInfo);
-  const userInfo = storeApp.getState().userInfo;
+  // const userInfo = storeApp.getState().userInfo;
 
-  //FIXME
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
     if (!name || !email || !password) {
       alert("Please enter details correctly");
       return;
@@ -35,31 +36,26 @@ export default function SignUp() {
     };
 
     const res: string | void = await signup(newUserData);
+    let accessToken: string = '';
     if (res === '') {
-      console.log("!res == true");
+      // console.log("!res == true");
       alert("User already exists");
       setName("");
       setEmail("");
       setPassword("");
     } else {
-      console.log("RES BODY :", res);
-      const accessToken = res as string;
-      console.log("accessToken", accessToken);
+      // console.log("RES BODY :", res);
+      accessToken = res as string;
+      // console.log("accessToken", accessToken);
       localStorage.setItem("accessToken", accessToken);
       setName("");
       setEmail("");
       setPassword("");
 
-      //function to make jwt profile call
-      // const getProfile = async (token: string) => {
-      //   const prof = await profile(token);
-      //   dispatch(loginAction(prof));
-      // };
-
-      // getProfile(accessToken);
-      if (accessToken) navigate("/app/signin");
     }
+    if (accessToken) navigate("/app/signin");
   }
+
   return (
     <>
       <Navigation findOffers={findOffers} />

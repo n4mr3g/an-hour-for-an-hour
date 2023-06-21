@@ -2,7 +2,7 @@ import "./Dashboard.css";
 import Navigation from "../Navigation/Navigation";
 import Menu from "../Menu/Menu";
 import { Outlet } from "react-router-dom";
-import { storeApp } from "../../store";
+import { storeApp } from "../../redux/store.js";
 import findOffers from "../../App.jsx";
 
 export default function Dashboard() {

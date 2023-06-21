@@ -1,24 +1,33 @@
 import "./Navigation.css";
 import SearchBar from "../SearchBar/SearchBar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { logout } from "../../api/apiServiceJWT";
-import { storeApp } from "../../store";
-import { loginAction } from "../../actions";
+import { storeApp } from "../../redux/store";
+import { loginAction } from "../../redux/actions";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { UserFromBackend } from "../../dataTypes";
+import { logoutUser } from "../../redux/userInfoSlice";
 
 export default function Navigation({ findOffers }: { findOffers: Function }) {
   const [listCount, setListCount] = useState<number>(8);
 
-  // const user = useSelector(userInfo, shallowEqual);
-  const user = storeApp.getState().userInfo;
+  let navigate = useNavigate();
 
-  const dispatch = useDispatch();
+  const user: UserFromBackend = useAppSelector(state => state.userInfo[0]);
+  console.log('userLogged', user)
+  // const user2: UserFromBackend = storeApp.getState().userInfo[0];
+  // console.log('userLogged2', user2)
 
+
+  const dispatch = useAppDispatch();
   function handleSignOut() {
     logout("accessToken");
     // dispatch(profile(''));
-    dispatch(loginAction(false));
+    // dispatch(loginAction(false));
+    dispatch(logoutUser(user));
+    navigate("/");
   }
 
   return (
@@ -31,7 +40,7 @@ export default function Navigation({ findOffers }: { findOffers: Function }) {
         <SearchBar findOffers={findOffers} />
         <div className="nav-options same-width ">
           <div className="mylist-wrapper">
-            {user.email && (
+            {user && (
               <>
                 <Link to={"/app/dashboard/profile"} className="my-list">
                   Dashboard
@@ -50,7 +59,7 @@ export default function Navigation({ findOffers }: { findOffers: Function }) {
                 </Link>
               </>
             )}
-            {!user.name && (
+            {!user && (
               <>
                 <Link className="signup-link" to={"/app/signup"}>
                   {" "}

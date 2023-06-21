@@ -10,7 +10,7 @@ import { fetchOffersFromServer } from "./api/apiService.jsx";
 // import { Offer } from "./dataTypes.jsx";
 import { Offer } from "./dataTypes.tsx";
 import OffersList from "./components/OffersList/OffersList.tsx";
-import { set } from "./actions.ts";
+import { set } from "./redux/actions.ts";
 
 export default function App() {
   const [offers, setOffers] = useState<Offer[]>([]);

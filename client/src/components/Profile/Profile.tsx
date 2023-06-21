@@ -1,4 +1,4 @@
-import { storeApp } from "../../store";
+import { storeApp } from "../../redux/store";
 import Button from "../Button/Button";
 import "./Profile.css";
 

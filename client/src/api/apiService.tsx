@@ -1,7 +1,7 @@
 import { Offer } from "../dataTypes";
 import { signup, login } from "./apiServiceJWT";
 import { useDispatch } from "react-redux";
-import { set, loginAction } from "../actions";
+import { set, loginAction } from "../redux/actions";
 
 // const [offers, setOffers] = useState([]);
 
@@ -61,6 +61,6 @@ export async function fetchOffersFromServer(): Promise<Offer[]> {
 
   // const res = response.json();
   const res: Offer[] = await response.json();
-  console.log(res, "res");
+  // console.log(res, "res");
   return res ? res : [];
 }

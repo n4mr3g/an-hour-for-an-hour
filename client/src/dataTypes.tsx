@@ -15,6 +15,12 @@ export type User = {
   image: string
 }
 
+export type UserFromBackend = {
+  name: string,
+  email: string,
+  image: string,
+  offers: Offer[]
+}
 
 export type LoginData = {
   email: string,

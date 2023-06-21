@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 export default function OffersList({ offers }: { offers: Offer[] }) {
   useEffect(() => {
-    console.log("Offers: ", offers);
+    // console.log("Offers: ", offers);
   }, [offers]);
 
   return (

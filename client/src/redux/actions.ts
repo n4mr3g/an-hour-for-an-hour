@@ -1,4 +1,4 @@
-import { Offer } from "./dataTypes";
+import { Offer } from "../dataTypes";
 
 export function set(data: Offer[]) {
   return { type: "SET_OFFERS", payload: data };
