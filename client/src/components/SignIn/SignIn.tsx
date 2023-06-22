@@ -17,7 +17,6 @@ export default function SignIn() {
   const { register, handleSubmit, reset } = useForm<FieldValues>();
 
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const clean = DOMPurify.sanitize;
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -28,16 +27,17 @@ export default function SignIn() {
 
     const response : UserFromBackend = await login(loginData);
 ``
-    console.log(response, "RESPONSE!!!!");
     if (!response) {
       alert("Wrong email or password");
       reset();
       return;
     }
+
     storeApp.dispatch(loginUser(response));
     reset(); // Needed?
     navigate("/app");
   };
+  
   return (
     <>
       <Navigation findOffers={findOffers} />

@@ -13,7 +13,6 @@ export default function Navigation({ findOffers }: { findOffers: Function }) {
 
   let navigate = useNavigate();
 
-
   const loggedIn: boolean = useAppSelector((state) => state.userInfo.loggedIn);
   const user: UserFromBackend = useAppSelector((state) => state.userInfo);
 
