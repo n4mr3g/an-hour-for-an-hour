@@ -1,18 +1,37 @@
-import { AnyAction, Slice, createSlice } from "@reduxjs/toolkit";
+import { Slice, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User, UserFromBackend } from "../dataTypes";
 
-export const userInfoSlice: Slice = createSlice({
-  name: 'userInfo',
-  initialState: [],
-  reducers: {
-    addUser(state: UserFromBackend[], action: AnyAction) {
-      state.push(action.payload)
-    },
-    logoutUser(state: UserFromBackend[], action: AnyAction) {
-      state.pop();
-    }
-  }
-})
 
-export const { addUser, logoutUser } = userInfoSlice.actions
-export default userInfoSlice.reducer
+interface UserState {
+  loggedIn: boolean;
+  user: User;
+  accessToken: string;
+}
+
+
+const initialState = {
+  loggedIn: false,
+  user: {
+    name: '',
+    email: '',
+    image: '',
+    offers: [],
+  },
+  accessToken: '',
+}
+
+export const userInfoSlice: Slice = createSlice({
+  name: "userInfo",
+  initialState,
+  reducers: {
+    loginUser: (state, action: PayloadAction<UserState>) => {
+      state.loggedIn = true;
+    },
+    logoutUser: (state) => {
+      state.loggedIn = false;
+    },
+  },
+});
+
+export const { loginUser, logoutUser } = userInfoSlice.actions;
+export default userInfoSlice.reducer;

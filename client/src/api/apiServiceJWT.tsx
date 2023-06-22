@@ -24,7 +24,6 @@ const login = (loginData: LoginData) => {
   })
     .then((res) => res.json())
     .then((res) => {
-      console.log(res, "RESkasdjhflkjasdjfkasjf!!!!");
       if (!res) {
         throw new Error("Wrong email or password");
       }
@@ -32,7 +31,6 @@ const login = (loginData: LoginData) => {
       return res.user;
     })
     .catch((err) => {
-      console.log(err, "ERROR!!!!!!!!!!!");
       console.error(err);
     });
 };

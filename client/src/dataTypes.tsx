@@ -15,7 +15,7 @@ export type User = {
   image: string
 }
 
-export type UserFromBackend = {
+export type UserFromBackend  = {
   name: string,
   email: string,
   image: string,

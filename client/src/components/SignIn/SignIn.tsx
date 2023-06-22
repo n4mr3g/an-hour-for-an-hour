@@ -7,10 +7,11 @@ import { useNavigate } from "react-router-dom";
 import findOffers from "../../App.jsx";
 import { LoginData, UserFromBackend } from "../../dataTypes.jsx";
 import { useAppDispatch } from "../../redux/hooks.js";
-import { addUser } from "../../redux/userInfoSlice.js";
+import { loginUser } from "../../redux/userInfoSlice.js";
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 
 import DOMPurify from "dompurify";
+import { storeApp } from "../../redux/store.js";
 
 export default function SignIn() {
   const { register, handleSubmit, reset } = useForm<FieldValues>();
@@ -26,14 +27,14 @@ export default function SignIn() {
     };
 
     const response : UserFromBackend = await login(loginData);
-
+``
     console.log(response, "RESPONSE!!!!");
     if (!response) {
       alert("Wrong email or password");
       reset();
       return;
     }
-    dispatch(addUser(response));
+    storeApp.dispatch(loginUser(response));
     reset(); // Needed?
     navigate("/app");
   };

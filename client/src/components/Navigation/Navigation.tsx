@@ -1,31 +1,39 @@
 import "./Navigation.css";
 import SearchBar from "../SearchBar/SearchBar";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { logout } from "../../api/apiServiceJWT";
-import { storeApp } from "../../redux/store";
-import { loginAction } from "../../redux/actions";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { UserFromBackend } from "../../dataTypes";
 import { logoutUser } from "../../redux/userInfoSlice";
+import { storeApp } from "../../redux/store";
 
 export default function Navigation({ findOffers }: { findOffers: Function }) {
   const [listCount, setListCount] = useState<number>(8);
 
   let navigate = useNavigate();
 
+
+  const loggedIn: boolean = useAppSelector((state) => state.userInfo.loggedIn);
   const user: UserFromBackend = useAppSelector((state) => state.userInfo);
 
-  console.log("userLogged", user);
+  console.log("user", user);
 
   const dispatch = useAppDispatch();
+
   function handleSignOut() {
+    console.log("LOG OUT");
     logout("accessToken");
 
-    dispatch(logoutUser(user));
+    // dispatch(logoutUser({}));
+    storeApp.dispatch(logoutUser(user));
+    // setUserLogged(false);
     navigate("/");
   }
+
+  // useEffect(() => {
+  //   setUser(useAppSelector((state) => state.userInfo));
+  // }, []);
 
   return (
     <nav>
@@ -33,11 +41,10 @@ export default function Navigation({ findOffers }: { findOffers: Function }) {
         <Link to={"/app"} className="logo same-width">
           Hour One
         </Link>
-        {/* <div className="logo same-width ">Hour One</div> */}
         <SearchBar findOffers={findOffers} />
         <div className="nav-options same-width ">
           <div className="mylist-wrapper">
-            {user && (
+            {loggedIn && (
               <>
                 <Link to={"/app/dashboard/profile"} className="my-list">
                   Dashboard
@@ -49,14 +56,14 @@ export default function Navigation({ findOffers }: { findOffers: Function }) {
                 <Link
                   onClick={handleSignOut}
                   className="signout-link"
-                  to={"/app/signup"}
+                  to={"/app"}
                 >
                   {" "}
                   Log Out
                 </Link>
               </>
             )}
-            {!user && (
+            {!loggedIn && (
               <>
                 <Link className="signup-link" to={"/app/signup"}>
                   {" "}
