@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 
 import findOffers from "../../App.jsx";
 import { LoginData, UserFromBackend } from "../../dataTypes.jsx";
-import { useAppDispatch } from "../../redux/hooks.js";
 import { loginUser } from "../../redux/userInfoSlice.js";
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 
@@ -25,6 +24,7 @@ export default function SignIn() {
       password: clean(data.password),
     };
 
+    // Get user data from backend
     const response : UserFromBackend = await login(loginData);
 ``
     if (!response) {
@@ -33,11 +33,12 @@ export default function SignIn() {
       return;
     }
 
+    // Dispatch user data to Redux store
     storeApp.dispatch(loginUser(response));
     reset(); // Needed?
     navigate("/app");
   };
-  
+
   return (
     <>
       <Navigation findOffers={findOffers} />

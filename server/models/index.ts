@@ -24,12 +24,11 @@ main()
 const offerSchema = new Schema({
   author: String,
   authorId: String,
-  offer: String,
+  title: String,
   image: String,
-  message: String,
+  description: String,
   comment: String,
   type: String,
-  //   createdAt: Date,
 });
 
 const userSchema = new Schema({

@@ -7,6 +7,7 @@ import randomNumber from "../utils/utils";
 export async function postOffer(req: Request, res: Response) {
   try {
     const offer = req.body;
+    console.log(offer, "offer from client");
     const newOffer = new OfferModel({
       ...offer,
       image: `https://i.pravatar.cc/200?u=${randomNumber()}@pravatar.com`,

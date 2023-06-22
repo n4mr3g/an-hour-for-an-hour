@@ -5,7 +5,7 @@ import { postOffer } from "../../api/apiService";
 import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 
-import * as DOMPurify from "dompurify";
+import DOMPurify from "dompurify";
 
 export default function Form() {
   const [comment, setComment] = useState("");
@@ -15,23 +15,23 @@ export default function Form() {
 
   let clean = DOMPurify.sanitize;
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     let newOffer: Offer = {
       title: clean(data.title),
       type: clean(data.type),
-      message: clean(data.message),
+      description: clean(data.description),
       comment: clean(data.comment),
       author: clean(data.author),
       image: clean(data.image),
     };
+    console.log(newOffer);
     reset();
-    postOffer(newOffer);
+    await postOffer(newOffer);
     navigate("/app");
-  }
+  };
 
   return (
     <div className="form-container">
-
       <script type="text/javascript" src="dist/purify.min.js"></script>
 
       <form className="form-itself" onSubmit={handleSubmit(onSubmit)}>
@@ -40,7 +40,9 @@ export default function Form() {
           <label className="input-label" htmlFor="title">
             title
           </label>
+
           <input
+            id="title"
             className="input-box"
             type="text"
             autoFocus={true}
@@ -50,52 +52,48 @@ export default function Form() {
         </div>
 
         <div className="input-group">
-
-          <label className="input-label" htmlFor="offer-type">
+          <label className="input-label" htmlFor="type">
             Type
           </label>
 
-          <select {...register("offer-type", { required: true })}>
+          <select {...register("type", { required: true })}>
             <option value="Teach">Teach</option>
             <option value="Learn">Learn</option>
           </select>
-
         </div>
 
         <div className="input-group">
-
-          <label className="input-label" htmlFor="message">
+          <label className="input-label" htmlFor="description">
             Message
           </label>
 
-          <textarea {...register("message", {required: true, maxLength: 2000})}
+          <textarea
+            id="description"
             className="input-box"
             cols={40}
             rows={5}
+            {...register("description", { required: true, maxLength: 2000 })}
           />
-
         </div>
 
         <div className="input-group">
-    //TODO
           <label className="input-label" htmlFor="substitute">
             Open to learn something different?
           </label>
+
           <textarea
             id="substitute"
             className="input-box"
             value={comment}
-            onChange={(e) => setComment(e.target.value)}
             cols={50}
             rows={2}
+            {...register("substitute", { required: false, maxLength: 2000 })}
           ></textarea>
-
         </div>
 
         <button className="create-btn" type="submit">
           Create
         </button>
-
       </form>
     </div>
   );

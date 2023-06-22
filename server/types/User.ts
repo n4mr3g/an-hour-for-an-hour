@@ -1,17 +1,17 @@
 export type Offer = {
-  author: String,
-  authorId: String,
-  offer: String,
-  image: String,
-  message: String,
-  comment: String,
-  type: String,
-}
+  author: string;
+  authorId: string;
+  title: string;
+  image: string;
+  description: string;
+  comment: string;
+  type: string;
+};
 
 export type User = {
-  name: string,
-  email: string,
-  profilePicture: string,
-  offers: Offer[],
-  favorites: Offer[],
-}
+  name: string;
+  email: string;
+  profilePicture: string;
+  offers: Offer[];
+  favorites: Offer[];
+};

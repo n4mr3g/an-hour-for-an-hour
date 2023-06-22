@@ -1,7 +1,7 @@
 import "./Navigation.css";
 import SearchBar from "../SearchBar/SearchBar";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { logout } from "../../api/apiServiceJWT";
 import { useAppSelector } from "../../redux/hooks";
 import { UserFromBackend } from "../../dataTypes";

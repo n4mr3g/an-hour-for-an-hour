@@ -33,7 +33,7 @@ export default function OfferCard({ offerEl }: { offerEl: Offer }) {
           </span>
         </div>
       </div>
-      {isExpanded && <div className="offer-info">{offerEl.message}</div>}
+      {isExpanded && <div className="offer-info">{offerEl.description}</div>}
       <div className="offer-container-bottom">
         <button className="connect-btn">Message</button>
         <div className="interests-logo-message">
