@@ -12,7 +12,9 @@ export async function create(req: Request, res: Response) {
   try {
     const user = await UserModel.findOne({ email: email });
     if (user) {
-      return res.status(409).send({ error: "409", data: "User already exits" });
+      return res
+        .status(409)
+        .send({ error: "User already exists", status: 409 });
     }
 
     if (password === "") throw new Error();
@@ -26,36 +28,49 @@ export async function create(req: Request, res: Response) {
     });
     const { id } = await newUser.save();
     const accessToken = jwt.sign({ id }, SECRET_KEY);
-    res.status(201)
-    res.send(JSON.stringify(accessToken));
+    res.status(201).send(JSON.stringify(accessToken));
   } catch (error) {
-    res.status(400).send({ error, data: "Could not create user" });
+    res.status(400).send({ error: "Could not create user", status: 400 });
   }
 }
 
 export async function login(req: Request, res: Response) {
   try {
     const { email, password } = req.body;
+
+    // We search for the user in the database
     const user = await UserModel.findOne({ email });
+
+    // If the user is not found, we throw an error
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    // If the user is found, we validate the password
     const validatePass = await bcrypt.compare(password, user?.password);
-    if (!validatePass) throw new Error();
+
+    // If the password is not valid, we throw an error
+    if (!validatePass) throw new Error("Invalid login");
+
+    // If the password is valid, we create a token
     const accessToken = jwt.sign({ id: user.id }, SECRET_KEY);
-    res.status(200);
-    const userDataForClient =  composeUserDataForClient(user, accessToken);
-    res.send(userDataForClient);
+
+    // We compose the user data for the client
+    const userDataForClient = composeUserDataForClient(user, accessToken);
+
+    // We send the token to the client
+    res.status(200).send(userDataForClient);
   } catch (error) {
-    res.status(401);
-    res.send({ error, data: "User not found" });
+    res.status(401).send({ error: "Invalid login", status: 401 });
   }
 }
 
 function composeUserDataForClient(user: User, accessToken: string) {
   const { name, email, profilePicture, offers, favorites } = user;
   const newUser = { name, email, profilePicture, offers, favorites };
-  const responseObject = {user: newUser, accessToken: accessToken}
+  const responseObject = { user: newUser, accessToken: accessToken };
   return responseObject;
 }
-
 
 export async function profile(req: Request, res: Response) {
   try {
@@ -65,6 +80,6 @@ export async function profile(req: Request, res: Response) {
     }
     res.status(200).send(user);
   } catch (error) {
-    res.status(404).send({ error, data: "Resource not found" });
+    res.status(404).send({ error: "Resource not found", status: 404 });
   }
 }

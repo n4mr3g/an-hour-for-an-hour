@@ -20,9 +20,7 @@ const formSchema = Yup.object().shape({
   confirmPassword: Yup.string()
     .required("Confirm Password is required")
     .oneOf([Yup.ref("password")], "Passwords do not match"),
-  email: Yup.string()
-    .required("Please enter a valid email address")
-    .email("Please enter a valid email address"),
+  email: Yup.string().email("Please enter a valid email address"),
   name: Yup.string()
     .required("Please enter your name")
     .min(3, "Name should be at least 3 characters")
@@ -55,7 +53,8 @@ export default function SignUp() {
 
     const res = await signup(newUserData);
     let accessToken: string = "";
-    if (res.error === '409') {
+    console.log(res, "RES!!!!");
+    if (res.hasOwnProperty('error')) {
       alert("Email already in use");
       reset();
     } else {

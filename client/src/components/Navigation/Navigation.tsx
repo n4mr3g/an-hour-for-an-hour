@@ -15,14 +15,14 @@ export default function Navigation({ findOffers }: { findOffers: Function }) {
 
   let navigate = useNavigate();
 
-  const user: UserFromBackend = useAppSelector((state) => state.userInfo[0]);
+  const user: UserFromBackend = useAppSelector((state) => state.userInfo);
+
   console.log("userLogged", user);
 
   const dispatch = useAppDispatch();
   function handleSignOut() {
     logout("accessToken");
-    // dispatch(profile(''));
-    // dispatch(loginAction(false));
+
     dispatch(logoutUser(user));
     navigate("/");
   }

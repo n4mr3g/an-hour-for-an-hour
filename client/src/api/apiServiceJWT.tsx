@@ -22,15 +22,19 @@ const login = (loginData: LoginData) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(loginData),
   })
+    .then((res) => res.json())
     .then((res) => {
-      const response = res.json();
-      return response;
+      console.log(res, "RESkasdjhflkjasdjfkasjf!!!!");
+      if (!res) {
+        throw new Error("Wrong email or password");
+      }
+      localStorage.setItem("accessToken", res.accessToken);
+      return res.user;
     })
-    .then((response) => {
-      localStorage.setItem("accessToken", response.accessToken);
-      return response.user;
-    })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err, "ERROR!!!!!!!!!!!");
+      console.error(err);
+    });
 };
 
 const profile = (accessToken: string) => {

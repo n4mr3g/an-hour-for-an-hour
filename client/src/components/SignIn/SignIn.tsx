@@ -4,7 +4,6 @@ import { login } from "../../api/apiServiceJWT.jsx";
 
 import { useNavigate } from "react-router-dom";
 
-
 import findOffers from "../../App.jsx";
 import { LoginData, UserFromBackend } from "../../dataTypes.jsx";
 import { useAppDispatch } from "../../redux/hooks.js";
@@ -12,7 +11,6 @@ import { addUser } from "../../redux/userInfoSlice.js";
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 
 import DOMPurify from "dompurify";
-
 
 export default function SignIn() {
   const { register, handleSubmit, reset } = useForm<FieldValues>();
@@ -26,11 +24,16 @@ export default function SignIn() {
       email: clean(data.email),
       password: clean(data.password),
     };
-    const userData: UserFromBackend = await login(loginData);
 
-    console.log(userData, "userLoggedIn");
+    const response : UserFromBackend = await login(loginData);
 
-    dispatch(addUser(userData));
+    console.log(response, "RESPONSE!!!!");
+    if (!response) {
+      alert("Wrong email or password");
+      reset();
+      return;
+    }
+    dispatch(addUser(response));
     reset(); // Needed?
     navigate("/app");
   };
