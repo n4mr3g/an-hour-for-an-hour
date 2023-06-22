@@ -3,7 +3,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { logout } from "../../api/apiServiceJWT";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
 import { UserFromBackend } from "../../dataTypes";
 import { logoutUser } from "../../redux/userInfoSlice";
 import { storeApp } from "../../redux/store";
@@ -19,21 +19,11 @@ export default function Navigation({ findOffers }: { findOffers: Function }) {
 
   console.log("user", user);
 
-  const dispatch = useAppDispatch();
-
   function handleSignOut() {
-    console.log("LOG OUT");
     logout("accessToken");
-
-    // dispatch(logoutUser({}));
     storeApp.dispatch(logoutUser(user));
-    // setUserLogged(false);
     navigate("/");
   }
-
-  // useEffect(() => {
-  //   setUser(useAppSelector((state) => state.userInfo));
-  // }, []);
 
   return (
     <nav>
